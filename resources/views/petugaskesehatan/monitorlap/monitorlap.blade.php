@@ -33,17 +33,18 @@
                                     <td>{{ $report->gejala }}</td>
                                     <td>{{ $report->keterangan }}</td>
                                     <td>
-                                        @if ($report->status == 'diproses')
-                                            <span class="badge badge-success d-block mb-1">Diproses</span>
-                                            <span class="text-muted">✓ Selesai</span>
+                                        <a href="{{ route('pelaporan.show', $report->id) }}" class="btn btn-info btn-sm"
+                                            title="Lihat Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {{-- Tambahan tombol atau status di bawah pengobatan --}}
+                                        @if ($report->status === 'belum_diproses')
+                                          <span class="badge badge-success mt-2">Belum di proses</span>
+                                        @elseif ($report->status === 'sedang_diproses')
+                                            <span class="badge badge-success mt-2">Sedang Diproses</span>
                                         @else
-                                            <button class="btn btn-sm btn-warning" disabled>Belum Diproses</button>
-                                            <a href="{{ route('monitorlap.createproses', $report->id) }}"
-                                                class="btn btn-sm btn-success" style="margin-left: 5px;">
-                                                Proses
-                                            </a>
+                                            <span class="badge badge-success mt-2">Sudah di proses</span>
                                         @endif
-                                    </td>
                                     </td>
                                 </tr>
                             @endforeach

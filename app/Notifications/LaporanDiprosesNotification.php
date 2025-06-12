@@ -10,22 +10,20 @@ class LaporanDiprosesNotification extends Notification
 {
     use Queueable;
 
-    public function __construct(public $laporan) {}
+    public function __construct(protected $laporan, protected $oldStatus, protected $newstatus) {}
 
     public function via($notifiable)
     {
-        return ['mail']; // Bisa tambah 'database' atau 'sms'
+        return ['database']; // Bisa tambah 'database' atau 'sms'
     }
 
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Laporan Anda Sedang Diproses')
-            ->greeting('Halo ' . $notifiable->name . ',')
-            ->line('Laporan Anda dengan judul "' . $this->laporan->judul . '" sedang diproses oleh petugas.')
-            ->line('Kami akan memberi tahu lagi saat laporan selesai ditangani.')
-            ->line('Terima kasih atas partisipasi Anda.')
-            ->salutation('Salam sehat,')
-            ;
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
+
+
 }

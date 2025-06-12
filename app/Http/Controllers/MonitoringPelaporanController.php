@@ -27,10 +27,10 @@ class MonitoringPelaporanController extends Controller
     $laporan->status = 'diproses';
     $laporan->save();
 
-    // Kirim notifikasi ke user yang membuat laporan
-    if ($laporan->user) {
-        $laporan->user->notify(new LaporanDiprosesNotification($laporan));
-    }
+    // // Kirim notifikasi ke user yang membuat laporan
+    // if ($laporan->user) {
+    //     $laporan->user->notify(new LaporanDiprosesNotification($laporan));
+    // }
 
     return redirect()->route('monitorlap.index')->with('success', 'Laporan sedang diproses.');
 }

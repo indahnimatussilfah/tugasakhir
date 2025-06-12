@@ -9,5 +9,10 @@ class Pelaporan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'gejala', 'keterangan', 'status'];
+    protected $fillable = ['user_id', 'nama', 'gejala', 'keterangan', 'status', 'jawaban'];
+
+
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -11,9 +11,11 @@ return new class extends Migration
         Schema::create('pelaporans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->foreignId('user_id')->constrained(table: 'users', indexName:'pelaporan_users_id')->onDelete('cascade');
             $table->text('gejala'); // Menyimpan gabungan checkbox (implode)
             $table->text('keterangan')->nullable();
-            $table->enum('status', ['belum_diproses', 'diproses'])->default('belum_diproses');
+            $table->enum('status', ['belum_diproses', 'sedang_diproses' , 'sudah_diproses'])->default('belum_diproses');
+            $table->text('jawaban')->nullable();
             $table->timestamps();
         });
     }

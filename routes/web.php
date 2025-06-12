@@ -44,6 +44,7 @@ Route::get('/petugaskesehatan', [PetugasKesehatanDashboardController::class, 'in
 
 
 
+
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
 Route::get('/gis', [GisController::class, 'index'])->name('gis.index');
 
@@ -56,6 +57,10 @@ Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index
 
 Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan.index');
 Route::post('/pelaporan', [PelaporanController::class, 'store'])->name('pelaporan.store');
+Route::get('/pelaporan/{id}', [PelaporanController::class, 'edit'])->name('pelaporan.edit');
+// Route::post('/pelaporan', [PelaporanController::class, 'update'])->name('pelaporan.update');
+Route::get('/pelaporan/{id}/detail-pelaporan', [PelaporanController::class, 'show'])->name('pelaporan.show');
+Route::put('/pelaporan/{id}/update-pelaporan', [PelaporanController::class, 'update'])->name('pelaporan.update');
 
 
 // Route::get('/dashboard', function () {
@@ -113,6 +118,7 @@ Route::get('/searchDataPenyakit', [DataPenyakitController::class, 'searchPenyaki
 Route::get('/datapenyakit/create', [DataPenyakitController::class, 'create'])->name('datapenyakit.create');
 
 Route::post('/datapenyakit', [DataPenyakitController::class, 'store'])->name('datapenyakit.store');
+
 
 // Tampilkan form edit
 Route::get('/datapenyakit/{id}', [DataPenyakitController::class, 'edit'])->name('datapenyakit.edit');
