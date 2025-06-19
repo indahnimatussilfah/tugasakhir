@@ -17,23 +17,29 @@
             </div>
 
             <div>
-                <label for="gejala">Gejala</label><br>
-                <div style="border: 1px solid #ccc; padding: 10px; border-radius: 6px;">
-                    <label><input type="checkbox" name="gejala[]" value="Demam"> Demam</label><br>
-                    <label><input type="checkbox" name="gejala[]" value="Batuk"> Batuk</label><br>
-                    <label><input type="checkbox" name="gejala[]" value="Sesak Napas"> Sesak Napas</label><br>
-                    <label><input type="checkbox" name="gejala[]" value="Mual"> Mual</label><br>
-                    <label><input type="checkbox" name="gejala[]" value="Sakit Kepala"> Sakit Kepala</label><br>
-                    <label><input type="checkbox" name="gejala[]" value="Nyeri Otot"> Nyeri Otot</label><br>
-                </div><br>
-
-                <div>
-                    <label for="keterangan" class="block font-medium">Keterangan</label>
-                    <textarea id="keterangan" name="keterangan" class="w-full border rounded-md p-2"></textarea>
+                <label for="gejala" class="block font-medium mb-1">Gejala Umum</label>
+                <div class="border border-gray-300 p-3 rounded-md">
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Demam"> Demam</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Batuk"> Batuk</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Sesak Napas"> Sesak Napas</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Mual"> Mual</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Sakit Kepala"> Sakit Kepala</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Nyeri Otot"> Nyeri Otot</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Kelelahan"> Kelelahan</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Diare"> Diare</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Sakit Tenggorokan"> Sakit Tenggorokan</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Pilek"> Pilek</label>
+                    <label class="block"><input type="checkbox" name="gejala[]" value="Hilang Indra Penciuman/Rasa"> Hilang Indra Penciuman/Rasa</label>
                 </div>
+            </div>
 
-                <button type="submit"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Kirim</button>
+            <div>
+                <label for="keterangan" class="block font-medium">Keterangan</label>
+                <textarea id="keterangan" name="keterangan" class="w-full border rounded-md p-2"></textarea>
+            </div>
+
+            <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Kirim</button>
         </form>
 
         <div class="mt-6">

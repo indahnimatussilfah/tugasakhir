@@ -6,9 +6,9 @@ export let marker = null;
 
 export function viewMapGis () {
     const urlParams = new URLSearchParams(window.location.search);
-    const lat = parseFloat(urlParams.get('lat'));
-    const lng = parseFloat(urlParams.get('lng'));
-    const nama = urlParams.get('nama');
+    const lat = parseFloat(urlParams.get('latitude'));
+    const lng = parseFloat(urlParams.get('longitude'));
+    const nama = urlParams.get('nama_layanan');
 
     const defaultLat = -6.326;
     const defaultLng = 108.322;

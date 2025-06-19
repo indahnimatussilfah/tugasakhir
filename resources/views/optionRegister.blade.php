@@ -1,6 +1,7 @@
 <x-login-form-layout>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-6xl">
+    <div class="min-h-screen flex items-center justify-center bg-red-100 bg-cover bg-center" 
+     style="background-image: url('/images/Register.png');">
+        <div class="bg-white bg-opacity-90 rounded-lg shadow-lg p-8 w-full max-w-6xl">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-gray-800 mb-2">Pilih Jenis Registrasi</h2>
                 <p class="text-gray-600">Silakan pilih jenis pengguna untuk melakukan registrasi</p>

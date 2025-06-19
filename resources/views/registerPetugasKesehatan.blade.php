@@ -29,6 +29,13 @@
                         class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
 
+                <div class="mb-6">
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Ulangi Password</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Ulangi password"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
+                </div>
+
                 <button type="submit"
                     class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition font-semibold">
                     Submit Registrasi
