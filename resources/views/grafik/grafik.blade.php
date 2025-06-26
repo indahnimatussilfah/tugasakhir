@@ -1,5 +1,7 @@
 <x-layouts>
-    <script>const $dataPenyakit = @json($dataPenyakit)</script>
+   <script>
+        const dataPenyakit = @json($dataPenyakit);
+    </script>
      <div id="test" class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
             <h1 class="text-center font-bold text-lg mb-6">
                 Grafik Penyakit Terbanyak Tahun 2023 di Kabupaten Indramayu

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pelaporan;
+use App\Notifications\JawabanPelaporanNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Notifications\LaporanBaruNotification;
@@ -59,6 +60,11 @@ class PelaporanController extends Controller
             'jawaban' => $request->jawaban,
             'status' => 'sudah_diproses',
         ]);
+
+        // dikirim ke user yang user id nya sama
+
+
+        User::where('id', $dataPelaporan->user_id)->firstOrFail()->notify(new JawabanPelaporanNotification($dataPelaporan));
 
         return redirect()->route('monitorlap.index')->with('success', 'Berhasil menambahkan jawaban pelaporan');
     }
