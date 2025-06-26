@@ -8,11 +8,8 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Carbon\Carbon;
 
-class ExportDataPenyakit implements FromCollection, WithHeadings
+class ExportMonitorlap implements FromCollection, WithHeadings
 {
-    /**
-     * @return \Illuminate\Support\Collection 
-     */
     public function collection()
     {
         $dataPenyakit = DataPenyakit::select([

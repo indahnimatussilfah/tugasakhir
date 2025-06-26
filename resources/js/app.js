@@ -64,7 +64,7 @@ if (penyakitChart) {
   
   const dataValues = dataPenyakit.map(item => `${item.jumlah}`);
   
-  const colors = ['#4ade80', '#60a5fa', '#facc15'];
+  const colors = ['#ef4444'];
   
   // ✅ Render chart
   renderChart('penyakitChart', labels, dataValues, colors);

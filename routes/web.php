@@ -1,28 +1,30 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GisController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\GrafikController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DalakesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DataAkunController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\DataArtikelController;
 use App\Http\Controllers\DataPenyakitController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\admindashboardController;
 use App\Http\Controllers\Admin\KelolaAkunController;
 use App\Http\Controllers\FasilitasLayananController;
-use App\Http\Controllers\GisController;
 use App\Http\Controllers\MonitoringPenyakitController;
+use App\Http\Controllers\RegisterMasyarakatController;
 use App\Http\Controllers\GrafikPetugasAnalisController;
 use App\Http\Controllers\MonitoringPelaporanController;
 use App\Http\Controllers\PetugasanaliDashboardController;
-use App\Http\Controllers\PetugasKesehatanDashboardController;
-use App\Http\Controllers\RegisterMasyarakatController;
 use App\Http\Controllers\RegisterPetugasKesehatanController;
+use App\Http\Controllers\PetugasKesehatanDashboardController;
 
 Route::get('/', function () {
     return view('admin.layouts.app');
@@ -62,6 +64,11 @@ Route::get('/pelaporan/{id}', [PelaporanController::class, 'edit'])->name('pelap
 Route::get('/pelaporan/{id}/detail-pelaporan', [PelaporanController::class, 'show'])->name('pelaporan.show');
 Route::put('/pelaporan/{id}/update-pelaporan', [PelaporanController::class, 'update'])->name('pelaporan.update');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
 
 // Route::get('/dashboard', function () {
 //     return view('admin.pages.dashboard');
@@ -77,7 +84,7 @@ Route::put('/pelaporan/{id}/update-pelaporan', [PelaporanController::class, 'upd
 //     Route::delete('/{user}', [KelolaAkunController::class, 'destroy'])->name('destroy');
 // });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::get('/grafikk', [GrafikPetugasAnalisController::class, 'index'])->name('garfik.index');
 
@@ -130,6 +137,9 @@ Route::delete('/datapenyakit/{id}', [DataPenyakitController::class, 'destroy'])-
 
 Route::get('/datapenyakit/export/excel', [DataPenyakitController::class, 'exportDataPenyakitToExcel'])->name('datapenyakit.export');
 
+Route::post('/datapenyakit/import', [DataPenyakitController::class, 'import'])->name('datapenyakit.import');
+
+
 // Route::get('/monitoringpelaporan', [MonitoringPelaporanController::class, 'index'])->name('monitorlap.index');
 // Route::put('/monitoringpelaporan/{id}', [MonitoringPelaporanController::class, 'update'])->name('monitorlap.update');
 // Route::get('/monitoringpelaporan/proses/{id}', [MonitoringPelaporanController::class, 'create'])->name('monitorlap.createproses');
@@ -144,7 +154,12 @@ Route::get('/monitoringpelaporan/proses/{id}', [MonitoringPelaporanController::c
 Route::put('/monitoringpelaporan/{id}/proses', [MonitoringPelaporanController::class, 'process'])->name('proses.store');
 
 
- Route::get('/penyakit/export/{id}', [MonitoringPelaporanController::class, 'export'])->name('penyakit.export');
+ Route::get('/monitorlap/export/{id}', [MonitoringPelaporanController::class, 'export'])->name('monitorlap.export');
+
+ Route::get('monitorlap/export', [MonitoringPenyakitController::class, 'exportAll'])->name('monitorlap.exportAll');
+
+Route::get('/monitoring-penyakit/ajax', [MonitoringPenyakitController::class, 'ajaxSearch'])->name('monitoringpenyakit.ajax');
+Route::get('/monitoring-penyakit/search', [MonitoringPenyakitController::class, 'ajaxSearch'])->name('monitoringpenyakit.search');
 
 
 
@@ -161,6 +176,8 @@ Route::resource('register-masyarakat', RegisterMasyarakatController::class);
 // Route::post('/register', [RegisterController::class, 'register'])->name('registration.store');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 

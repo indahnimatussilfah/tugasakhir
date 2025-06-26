@@ -44,5 +44,15 @@ class AuthController extends Controller
     // Login failed
     return redirect()->route('login.show')->with('failed', 'Login gagal username dan password salah');
 }
+public function logout(Request $request)
+{
+    Auth::logout();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('login.show')->with('success', 'Anda berhasil logout');
+}
+
 
 }

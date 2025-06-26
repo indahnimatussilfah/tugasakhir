@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelaporan;
 use Illuminate\Http\Request;
-use App\Notifications\LaporanDiprosesNotification;
+use App\Notifications\MonitoringPelaporanNotification;
 
 class MonitoringPelaporanController extends Controller
 {
     public function index()
     {
-        $pelaporans = Pelaporan::latest()->get(); // Ambil semua data laporan, urut terbaru
+        $pelaporans = Pelaporan::latest()->get();
         return view('petugaskesehatan.monitorlap.monitorlap', compact('pelaporans'));
     }
 
@@ -20,18 +20,18 @@ class MonitoringPelaporanController extends Controller
         return view('petugaskesehatan.monitorlap.process_form', compact('pelaporan'));
     }
 
-
     public function process(Request $request, $id)
 {
     $laporan = Pelaporan::findOrFail($id);
     $laporan->status = 'diproses';
     $laporan->save();
 
-    // // Kirim notifikasi ke user yang membuat laporan
-    // if ($laporan->user) {
-    //     $laporan->user->notify(new LaporanDiprosesNotification($laporan));
-    // }
+    // Kirim notifikasi ke masyarakat
+    if ($laporan->user) {
+        $laporan->user->notify(new MonitoringPelaporanNotification($laporan));
+    }
 
-    return redirect()->route('monitorlap.index')->with('success', 'Laporan sedang diproses.');
+    return redirect()->route('monitorlap.index')->with('success', 'Laporan sedang diproses dan notifikasi dikirim.');
 }
+
 }

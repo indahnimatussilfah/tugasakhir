@@ -10,19 +10,24 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary mb-3">Daftar Laporan Penyakit</h6>
 
             <div class="row align-items-end gy-3 gx-3">
+                
                 <!-- Filter Nama Penyakit -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="inputDataPenyakit" class="form-label">Filter Penyakit</label>
                     <input type="text" name="inputDataPenyakit" id="inputDataPenyakit" class="form-control" placeholder="Masukkan nama penyakit">
                 </div>
 
                 <!-- Filter Bulan -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form action="{{ route('datapenyakit.index') }}" method="GET">
                         <label for="bulan" class="form-label">Filter Bulan</label>
                         <div class="input-group">
@@ -34,18 +39,29 @@
                     </form>
                 </div>
 
-                <!-- Tombol Tambah & Export -->
-                <div class="col-md-4 d-flex justify-content-end gap-2">
+                <!-- Tombol Tambah, Export, Import -->
+                <div class="col-md-6 d-flex justify-content-end gap-2 flex-wrap">
+                    
+                    <!-- Tombol Tambah Data -->
                     <a href="{{ route('datapenyakit.create') }}" class="btn btn-primary btn-sm">
                         <i class="fas fa-plus"></i> Tambah Data
                     </a>
+
+                    <!-- Tombol Export Data -->
                     <form action="{{ route('datapenyakit.export') }}" method="GET">
                         <input type="hidden" name="bulan" value="{{ request('bulan') }}">
                         <button type="submit" class="btn btn-success btn-sm">
                             <i class="fas fa-file-export"></i> Export
                         </button>
                     </form>
+
+                    <!-- Tombol Import Data (Munculkan Modal) -->
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#importModal">
+                        <i class="fas fa-file-import"></i> Import
+                    </button>
+
                 </div>
+
             </div>
         </div>
 
@@ -105,6 +121,35 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Import -->
+<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('datapenyakit.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import Data Penyakit</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Pilih File (.xlsx, .xls, .csv)</label>
+                        <input type="file" name="file" class="form-control" accept=".xlsx, .xls, .csv" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

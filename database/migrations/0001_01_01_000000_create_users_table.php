@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('nik');
             $table->string('email')->unique();
+            $table->string('no_telpon');
+             $table->string('alamat');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'masyarakat', 'petugas_kesehatan', 'petugas_analis'])->default('masyarakat');

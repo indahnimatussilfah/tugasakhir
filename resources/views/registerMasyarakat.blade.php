@@ -24,6 +24,20 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="no_telpon" class="block text-sm font-medium text-gray-700">No Telpon</label>
+                    <input type="text" id="no_telpon" name="no_telpon" placeholder="Masukkan nomor telepon"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
+                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat lengkap"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required></textarea>
+                </div>
+
+                <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email Address (Opsional)</label>
                     <input type="email" id="email" name="email" placeholder="Masukkan email (boleh dikosongkan)"
                         class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">

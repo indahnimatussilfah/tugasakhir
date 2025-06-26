@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportDataPenyakit;
+use App\Imports\ImportDataPenyakit;
 use Illuminate\Http\Request;
 use App\Models\DataPenyakit;
 use Maatwebsite\Excel\Facades\Excel;
@@ -97,6 +98,31 @@ class DataPenyakitController extends Controller
     {
         return Excel::download(new ExportDataPenyakit, 'dataPenyakit.xlsx');
     }
+
+    public function import(Request $request)
+{
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv'
+    ], [
+        'file.required' => 'File tidak boleh kosong.',
+        'file.mimes' => 'Format file harus berupa .xlsx, .xls, atau .csv.',
+    ]);
+
+    try {
+        Excel::import(new ImportDataPenyakit, $request->file('file'));
+
+        return redirect()->route('datapenyakit.index')->with('success', 'Data berhasil diimport.');
+    } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+        $failures = $e->failures();
+        $errorMessages = collect($failures)->map(function ($failure) {
+            return 'Baris ' . $failure->row() . ': ' . implode(', ', $failure->errors());
+        })->implode(' | ');
+
+        return redirect()->back()->with('error', 'Gagal import data: ' . $errorMessages);
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat import: ' . $e->getMessage());
+    }
+}
 
     public function searchPenyakit(Request $request)
     {

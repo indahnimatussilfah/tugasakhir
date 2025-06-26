@@ -17,14 +17,6 @@ class RegisterPetugasKesehatanController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -34,47 +26,20 @@ class RegisterPetugasKesehatanController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required|string|max:50',
+            'no_telpon' => 'required|string|max:20',
+            'alamat' => 'required|string|max:255',
         ]);
 
-       $data =  User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'nik' => 'null',
             'password' => Hash::make($request->password),
             'role' => 'petugas_kesehatan',
+            'no_telpon' => $request->no_telpon,
+            'alamat' => $request->alamat,
         ]);
+
         return redirect()->route('login.show')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

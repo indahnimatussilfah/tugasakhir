@@ -9,11 +9,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Daftar Layanan Kesehatan</h6>
-            <div>
-                <a href="{{ route('dalakes.create') }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Tambah Data
-                </a>
-            </div>
+            <a href="{{ route('dalakes.create') }}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Tambah Data
+            </a>
         </div>
 
         <div class="card-body">
@@ -40,7 +38,10 @@
                     </thead>
                     <tbody>
                         @forelse($dataLayanan as $layanan)
-                            <tr data-lat="{{ $layanan->latitude }}" data-lng="{{ $layanan->longitude }}" data-info="{{ $layanan->nama_layanan }}<br>{{ $layanan->alamat }}<br>{{ $layanan->telepon }}<br>{{ $layanan->deskripsi }}">
+                            <tr 
+                                data-lat="{{ $layanan->latitude }}" 
+                                data-lng="{{ $layanan->longitude }}" 
+                                data-info="{{ $layanan->nama_layanan }}<br>{{ $layanan->alamat }}<br>{{ $layanan->telepon }}<br>{{ $layanan->deskripsi }}">
                                 <td>{{ $layanan->id }}</td>
                                 <td>{{ $layanan->nama_layanan }}</td>
                                 <td>{{ $layanan->alamat }}</td>
@@ -66,14 +67,14 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center text-muted">Tidak ada data layanan kesehatan.</td>
+                                <td colspan="9" class="text-center text-muted">Tidak ada data layanan kesehatan.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
 
-            {{-- Leaflet Map --}}
+            {{-- Peta Leaflet --}}
             <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
             <div class="mt-4">
                 <div id="map" style="height: 400px;"></div>
@@ -82,6 +83,7 @@
                     <div id="detail" class="p-2 border rounded bg-light text-dark">Klik marker di peta untuk detail layanan.</div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -92,6 +94,4 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-
 @endsection
