@@ -15,9 +15,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\DataArtikelController;
 use App\Http\Controllers\DataPenyakitController;
+use App\Http\Controllers\LaporanDinasController;
 use App\Http\Controllers\admindashboardController;
 use App\Http\Controllers\Admin\KelolaAkunController;
 use App\Http\Controllers\FasilitasLayananController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\MonitoringPenyakitController;
 use App\Http\Controllers\RegisterMasyarakatController;
 use App\Http\Controllers\GrafikPetugasAnalisController;
@@ -56,6 +58,8 @@ Route::get('/gis', [GisController::class, 'index'])->name('gis.index');
 Route::get('/grafik', [GrafikController::class, 'index'])->name('grafik.index');
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
+
 
 Route::get('/pelaporan', [PelaporanController::class, 'index'])->name('pelaporan.index');
 Route::post('/pelaporan', [PelaporanController::class, 'store'])->name('pelaporan.store');
@@ -125,6 +129,13 @@ Route::get('/searchDataPenyakit', [DataPenyakitController::class, 'searchPenyaki
 Route::get('/datapenyakit/create', [DataPenyakitController::class, 'create'])->name('datapenyakit.create');
 
 Route::post('/datapenyakit', [DataPenyakitController::class, 'store'])->name('datapenyakit.store');
+
+
+// Tampilkan halaman rekap agregat
+Route::get('/laporan-dinas', [LaporanDinasController::class, 'index'])->name('laporandinas.index');
+
+// Export rekap agregat ke Excel
+Route::get('/laporan-dinas/export', [LaporanDinasController::class, 'export'])->name('laporandinas.export');
 
 
 // Tampilkan form edit
@@ -209,4 +220,9 @@ Route::post('/reports/{id}/process', [MonitoringPelaporanController::class, 'pro
 // Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest')->name('register');
 // Route::post('/register', [RegisterController::class, 'register'])->middleware('guest');
 
+
+
+Route::get('/notifikasi', [NotificationController::class, 'index'])->name('notifikasi.index');
+Route::post('/notifikasi/baca-semua', [NotificationController::class, 'markAllAsRead'])->name('notifikasi.markAllAsRead');
+Route::get('/notifikasi/{id}', [NotificationController::class, 'show'])->name('notifikasi.show');
 

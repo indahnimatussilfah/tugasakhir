@@ -38,7 +38,7 @@
         <img src="{{ asset('storage/' . $artikel->foto) }}" alt="{{  $artikel->judul }}" class="rounded-md mb-4 w-full h-40 object-cover">
         <h2 class="font-semibold text-lg">{{ $artikel->judul }}</h2>
         <p class="text-sm">{{ $artikel->isi }}</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
+        <a href="{{ route('artikel.show', $artikel->id) }}" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
       </div>
       @endforeach
 

@@ -39,7 +39,7 @@
                     @foreach ([
                         'Demam', 'Batuk', 'Sesak Napas', 'Mual', 'Sakit Kepala',
                         'Nyeri Otot', 'Kelelahan', 'Diare', 'Sakit Tenggorokan',
-                        'Pilek', 'Hilang Indra Penciuman/Rasa'
+                        'Pilek', 'Hilang Indra Penciuman/Rasa', 'Nyeri Tulang'
                     ] as $gejala)
                         <label class="block">
                             <input type="checkbox" name="gejala[]" value="{{ $gejala }}" {{ in_array($gejala, $selectedGejala) ? 'checked' : '' }}>

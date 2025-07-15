@@ -29,29 +29,33 @@
             </a>
 
             <!-- Dropdown Notifikasi -->
-            <div class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-20 hidden group-hover:block">
-                <h6 class="px-4 py-2 font-semibold text-gray-700 border-b">Alerts Center</h6>
+            <!-- Dropdown Notifikasi -->
+<div class="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-20 hidden group-hover:block">
+    <h6 class="px-4 py-2 font-semibold text-gray-700 border-b">Alerts Center</h6>
 
-                @forelse(auth()->user()->notifications as $notification)
-                    <a href="{{ route('pelaporan.show', $notification->data['pelaporan_id']) }}"
-                        class="flex items-start px-4 py-3 hover:bg-gray-100">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary w-8 h-8 flex items-center justify-center rounded-full">
-                                <i class="fas fa-file-alt text-white"></i>
-                            </div>
-                        </div>
-                        <div class="text-sm">
-                            <div class="text-gray-500">{{ $notification->created_at->diffForHumans() }}</div>
-                            <div class="font-semibold">{{ $notification->data['message'] }}</div>
-                        </div>
-                    </a>
-                @empty
-                    <div class="px-4 py-3 text-center text-sm text-gray-500">No notifications</div>
-                @endforelse
-
-                <a href="#" class="block px-4 py-3 text-center text-sm text-gray-600 hover:bg-gray-100">Show All
-                    Alerts</a>
+    @forelse(auth()->user()->notifications as $notification)
+        <a href="{{ route('notifikasi.index', $notification->data['pelaporan_id']) }}"
+           class="flex items-start px-4 py-3 hover:bg-gray-100">
+            <div class="mr-3">
+                <div class="icon-circle bg-primary w-8 h-8 flex items-center justify-center rounded-full">
+                    <i class="fas fa-file-alt text-white"></i>
+                </div>
             </div>
+            <div class="text-sm">
+                <div class="text-gray-500">{{ $notification->created_at->diffForHumans() }}</div>
+                <div class="font-semibold">{{ $notification->data['message'] }}</div>
+            </div>
+        </a>
+    @empty
+        <div class="px-4 py-3 text-center text-sm text-gray-500">Tidak ada notifikasi.</div>
+    @endforelse
+
+    <a href="{{ route('notifikasi.index') }}"
+       class="block px-4 py-3 text-center text-sm text-gray-600 hover:bg-gray-100">
+        Show All Alerts
+    </a>
+</div>
+
         </li>
 
         <!-- Dropdown Profil (Role: masyarakat) -->

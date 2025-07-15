@@ -1,6 +1,9 @@
 <x-login-form-layout>
-    <section class="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <section 
+        class="bg-gray-100 flex items-center justify-center min-h-screen bg-cover bg-center" 
+        style="background-image: url('/images/dinas.jpg');"
+    >
+        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md bg-opacity-90">
             <h2 class="text-2xl font-bold text-center mb-2">Login Aplikasi</h2>
             <p class="text-center text-gray-600 mb-6">Silakan login untuk melanjutkan</p>
 

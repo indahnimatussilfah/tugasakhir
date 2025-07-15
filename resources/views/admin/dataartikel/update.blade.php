@@ -29,7 +29,17 @@
 
                 <div class="form-group">
                     <label>Tanggal</label>
-                    <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal', $artikel->tanggal ? $artikel->tanggal->format('Y-m-d') : '') }}">
+                    @php
+                        $tanggalFormatted = '';
+                        if (!empty($artikel->tanggal)) {
+                            try {
+                                $tanggalFormatted = \Carbon\Carbon::parse($artikel->tanggal)->format('Y-m-d');
+                            } catch (\Exception $e) {
+                                $tanggalFormatted = '';
+                            }
+                        }
+                    @endphp
+                    <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal', $tanggalFormatted) }}">
                 </div>
 
                 <div class="form-group">

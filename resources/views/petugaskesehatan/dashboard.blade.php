@@ -45,28 +45,33 @@
 
 </div>
 
-<!-- Grafik Penyakit Terbanyak -->
+<!-- Grafik Penyakit Terbanyak dengan Progress Bars -->
 <div class="row">
     <div class="col-xl-8 mx-auto">
         <div class="card shadow mb-4">
             <div class="card-header bg-primary py-3">
-                <h6 class="m-0 font-weight-bold text-white">Grafik 5 Penyakit Terbanyak</h6>
+                <h6 class="m-0 font-weight-bold text-white">5 Penyakit Terbanyak (Bulan Ini)</h6>
             </div>
             <div class="card-body">
                 <p class="text-center mb-3 text-muted">Data berdasarkan laporan bulan ini</p>
-                <canvas 
-                    id="penyakitChart" 
-                    data-labels='@json($labels)' 
-                    data-data='@json($data)' 
-                    height="300">
-                </canvas>
+
+                @php
+                    $maxTotal = max($data) ?: 1; // Hindari pembagian nol
+                @endphp
+
+                @foreach($labels as $index => $nama_penyakit)
+                    @php
+                        $total = $data[$index];
+                        $percentage = ($total / $maxTotal) * 100;
+                    @endphp
+                    <h6 class="small font-weight-bold text-capitalize">{{ $nama_penyakit }} <span class="float-right">{{ $total }}</span></h6>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{{ asset('js/dashboardPenyakit.js') }}"></script>
-@endpush

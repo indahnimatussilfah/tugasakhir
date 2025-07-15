@@ -33,8 +33,11 @@
                 </div>
             </div>
             <div class="flex justify-end w-1/2 gap-10">
+                {{-- <div class="flex items-center">
+                    <img src="{{ asset('images/layanan2.jpg') }}" alt="" width="150">
+                </div> --}}
                 <div class="flex items-center">
-                    <img src="{{ asset('images/gambar1.jpg') }}" alt="" width="150">
+                    <img src="{{ asset('images/layanan2.jpg') }}" alt="" width="200">
                 </div>
                 <div>
                     <img src="{{ asset('images/gambar1.jpg') }}" alt="" width="250">

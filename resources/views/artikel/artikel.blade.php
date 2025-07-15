@@ -11,63 +11,15 @@
 
     <!-- Kontainer kartu -->
     <div id="cardContainer" class="flex gap-6 overflow-x-auto px-10 scroll-smooth">
-      <!-- Kartu 1 -->
       @foreach ($dataArtikel as $artikel)
-          
       <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('storage/' . $artikel->foto) }}" alt="{{  $artikel->judul }}" class="rounded-md mb-4 w-full h-40 object-cover">
+        <img src="{{ asset('storage/' . $artikel->foto) }}" alt="{{ $artikel->judul }}" class="rounded-md mb-4 w-full h-40 object-cover">
         <h2 class="font-semibold text-lg">{{ $artikel->judul }}</h2>
-        <p class="text-sm">{{ $artikel->isi }}</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
+        <p class="text-sm line-clamp-3">{{ Str::limit(strip_tags($artikel->isi), 100) }}</p>
+        <a href="{{ route('artikel.show', $artikel->id) }}" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
       </div>
       @endforeach
-
-      {{-- <!-- Kartu 2 -->
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/diare.jpg') }}" alt="Diare" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>Diare:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-
-      <!-- Kartu 3 -->
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div>
-      <div class="bg-white rounded-xl shadow-md w-72 p-4 flex-shrink-0">
-        <img src="{{ asset('images/hiv.jpg') }}" alt="HIV" class="rounded-md mb-4 w-full h-40 object-cover">
-        <h2 class="font-semibold text-lg">Pencegahan Penyakit</h2>
-        <p class="text-sm"><strong>HIV:</strong> Langkah-Langkah Sederhana untuk Hidup Sehat</p>
-        <a href="#" class="text-blue-500 text-sm mt-2 inline-block">selengkapnya...</a>
-      </div> --}}
-    {{-- </div> --}}
+    </div>
 
     <!-- Tombol panah kanan -->
     <button id="scrollRight" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow">
@@ -78,4 +30,14 @@
     </button>
   </div>
 </section>
+
+{{-- Opsional: Scroll Panah Kiri-Kanan --}}
+<script>
+  document.getElementById('scrollLeft').onclick = () => {
+    document.getElementById('cardContainer').scrollBy({ left: -300, behavior: 'smooth' });
+  };
+  document.getElementById('scrollRight').onclick = () => {
+    document.getElementById('cardContainer').scrollBy({ left: 300, behavior: 'smooth' });
+  };
+</script>
 </x-layouts>

@@ -43,6 +43,15 @@
         </a>
     </li>
 
+    <!-- Nav Item - Laporan Penyakit ke Dinas -->
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('laporandinas.index') }}">
+        <i class="fas fa-file-alt"></i> <!-- Ikon laporan -->
+        <span>Laporan Penyakit ke Dinas</span>
+    </a>
+</li>
+
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
