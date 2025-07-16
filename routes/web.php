@@ -50,7 +50,7 @@ Route::get('/petugaskesehatan', [PetugasKesehatanDashboardController::class, 'in
 
 
 Route::get('/home', [homeController::class, 'index'])->name('home.index');
-Route::get('/gis', [GisController::class, 'index'])->name('gis.index');
+Route::get('/gis', [GISController::class, 'index'])->name('gis.index');
 
 // Route::get('/pelaporan', function () {
 //     return view('pelaporan')// Halaman Form Pelaporan

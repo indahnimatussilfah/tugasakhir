@@ -3,7 +3,7 @@
          style="background-image: url('/images/Registerpetugas.png');">
 
         <div class="text-center mb-6">
-            <h2 class="text-3xl font-bold text-gray-800">Registrasi Aplikasi Petugas Kesehatan</h2>
+            <h2 class="text-3xl font-bold text-gray-800">Form Registrasi Puskesmas</h2>
             <p class="text-gray-600 mt-1">Silahkan isi formulir berikut untuk registrasi aplikasi</p>
         </div>
 
@@ -12,8 +12,8 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap"
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nama Layanan Kesehatan</label>
+                    <input type="text" id="name" name="name" placeholder="Masukkan nama layanan kesehatan"
                         class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                     <input type="hidden" name="role" value="petugas_kesehatan">
                 </div>
