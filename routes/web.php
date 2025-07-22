@@ -226,3 +226,14 @@ Route::get('/notifikasi', [NotificationController::class, 'index'])->name('notif
 Route::post('/notifikasi/baca-semua', [NotificationController::class, 'markAllAsRead'])->name('notifikasi.markAllAsRead');
 Route::get('/notifikasi/{id}', [NotificationController::class, 'show'])->name('notifikasi.show');
 
+
+
+Route::middleware(['auth'])->group(function () {
+    // Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    // Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    // Route::post('/logout', function () {
+    //     auth()->logout();
+    //     return redirect()->route('home.index');
+    // })->name('logout');
+});

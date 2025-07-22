@@ -15,7 +15,6 @@
 
     <script>
         const dalakes = @json($dalakes);
-
         const map = L.map('map').setView([-6.9, 107.6], 11);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -24,15 +23,23 @@
 
         const markers = [];
 
+        // Default: green icon
+        const defaultIcon = L.icon({
+            iconUrl: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
         dalakes.forEach(service => {
-            const marker = L.marker([service.latitude, service.longitude])
+            const marker = L.marker([service.latitude, service.longitude], { icon: defaultIcon })
                 .addTo(map)
                 .bindPopup(`
                     <strong>${service.nama_layanan}</strong><br>
                     ${service.alamat}<br>
                     ${service.foto ? `<img src="/storage/${service.foto}" alt="Foto ${service.nama_layanan}" style="width: 160px; height: 100px; object-fit: cover; border-radius: 8px; margin-top: 8px;">` : ''}
                 `);
-            
+
             markers.push({
                 marker,
                 lat: service.latitude,
@@ -46,57 +53,87 @@
         let userMarker;
 
         function getUserLocation() {
-            if (!navigator.geolocation) {
-                return alert("Browser tidak mendukung fitur geolokasi.");
+    if (!navigator.geolocation) {
+        return alert("Browser tidak mendukung fitur geolokasi.");
+    }
+
+    navigator.geolocation.getCurrentPosition(position => {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+
+        if (userMarker) map.removeLayer(userMarker);
+
+        userMarker = L.marker([userLat, userLng], {
+            icon: L.icon({
+                iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+                iconSize: [30, 40],
+                iconAnchor: [15, 40]
+            })
+        }).addTo(map).bindPopup("Lokasi Anda").openPopup();
+
+        map.setView([userLat, userLng], 13);
+
+        let nearest = null;
+        let farthest = null;
+        let minDist = Infinity;
+        let maxDist = -Infinity;
+
+        markers.forEach(item => {
+            const dist = getDistance(userLat, userLng, item.lat, item.lng);
+            item.distance = dist;
+
+            if (dist < minDist) {
+                minDist = dist;
+                nearest = item;
             }
 
-            navigator.geolocation.getCurrentPosition(position => {
-                const userLat = position.coords.latitude;
-                const userLng = position.coords.longitude;
+            if (dist > maxDist) {
+                maxDist = dist;
+                farthest = item;
+            }
+        });
 
-                if (userMarker) map.removeLayer(userMarker);
+        // Ganti warna ikon sesuai ketentuan:
+        // Terdekat = BIRU, Terjauh = MERAH, lainnya = HIJAU
+        markers.forEach(item => {
+            let iconUrl = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'; // default hijau
 
-                userMarker = L.marker([userLat, userLng], {
-                    icon: L.icon({
-                        iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
-                        iconSize: [30, 40],
-                        iconAnchor: [15, 40]
-                    })
-                }).addTo(map).bindPopup("Lokasi Anda").openPopup();
+            if (item === nearest) {
+                iconUrl = 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'; // biru untuk terdekat
+            } else if (item === farthest) {
+                iconUrl = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'; // merah untuk terjauh
+            }
 
-                map.setView([userLat, userLng], 13);
+            item.marker.setIcon(L.icon({
+                iconUrl,
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            }));
+        });
 
-                let nearest = null;
-                let minDist = Infinity;
-
-                markers.forEach(item => {
-                    const dist = getDistance(userLat, userLng, item.lat, item.lng);
-                    if (dist < minDist) {
-                        minDist = dist;
-                        nearest = item;
-                    }
-                });
-
-                if (nearest) {
-                    L.popup()
-                        .setLatLng([nearest.lat, nearest.lng])
-                        .setContent(`
-                            <b>Layanan Terdekat:</b><br>
-                            ${nearest.nama}<br>
-                            <small>${nearest.alamat}</small><br>
-                            <em>Jarak: ${minDist.toFixed(2)} km</em><br>
-                            ${nearest.foto ? `<img src="/storage/${nearest.foto}" alt="Foto ${nearest.nama}" style="width: 160px; height: 100px; object-fit: cover; border-radius: 8px; margin-top: 8px;">` : ''}
-                        `)
-                        .openOn(map);
-                }
-
-            }, () => {
-                alert("Gagal mengambil lokasi Anda.");
-            });
+        // Popup untuk layanan terdekat
+        if (nearest) {
+            L.popup()
+                .setLatLng([nearest.lat, nearest.lng])
+                .setContent(`
+                    <b>Layanan Terdekat:</b><br>
+                    ${nearest.nama}<br>
+                    <small>${nearest.alamat}</small><br>
+                    <em>Jarak: ${minDist.toFixed(2)} km</em><br>
+                    ${nearest.foto ? `<img src="/storage/${nearest.foto}" alt="Foto ${nearest.nama}" style="width: 160px; height: 100px; object-fit: cover; border-radius: 8px; margin-top: 8px;">` : ''}
+                `)
+                .openOn(map);
         }
 
+    }, () => {
+        alert("Gagal mengambil lokasi Anda.");
+    });
+}
+
+
         function getDistance(lat1, lon1, lat2, lon2) {
-            const R = 6371;
+            const R = 6371; // Radius bumi (km)
             const dLat = deg2rad(lat2 - lat1);
             const dLon = deg2rad(lon2 - lon1);
             const a =

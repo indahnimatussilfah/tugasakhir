@@ -9,8 +9,14 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Sesuaikan path view dengan folder yang kamu buat
-        return view('petugaskesehatan.profile.index');
+        $user = auth()->user();
+
+        // Gunakan view berbeda berdasarkan role
+        if ($user->role === 'masyarakat') {
+            return view('profile.index', compact('user'));
+        }
+
+        return view('petugaskesehatan.profile.index', compact('user'));
     }
 
     public function update(Request $request)
