@@ -75,9 +75,9 @@
             <div class="card-body">
                 <p class="text-center mb-3 text-muted">Data berdasarkan laporan bulan ini</p>
 
-                @php $maxTotal = max($data) ?: 1; @endphp
+                @php $maxTotal = !empty($data) ? max($data) : 1; @endphp
 
-                @foreach($labels as $index => $nama_penyakit)
+                @forelse($labels as $index => $nama_penyakit)
                     @php
                         $total = $data[$index];
                         $percentage = ($total / $maxTotal) * 100;
@@ -88,8 +88,9 @@
                     <div class="progress mb-3">
                         <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                @endforeach
-
+                @empty
+                    <p class="text-center text-muted">Belum ada data penyakit bulan ini.</p>
+                @endforelse
             </div>
         </div>
     </div>
@@ -105,9 +106,9 @@
                 <h6 class="m-0 font-weight-bold text-white">Distribusi Penyakit per Kecamatan</h6>
             </div>
             <div class="card-body">
-                @php $maxKecamatan = max($kecamatanData) ?: 1; @endphp
+                @php $maxKecamatan = !empty($kecamatanData) ? max($kecamatanData) : 1; @endphp
 
-                @foreach($kecamatanLabels as $index => $label)
+                @forelse($kecamatanLabels as $index => $label)
                     @php
                         $total = $kecamatanData[$index];
                         $percentage = ($total / $maxKecamatan) * 100;
@@ -116,7 +117,9 @@
                     <div class="progress mb-3">
                         <div class="progress-bar bg-info" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-center text-muted">Tidak ada data distribusi kecamatan.</p>
+                @endforelse
             </div>
         </div>
     </div>
@@ -128,9 +131,9 @@
                 <h6 class="m-0 font-weight-bold text-white">Distribusi Penyakit per Puskesmas</h6>
             </div>
             <div class="card-body">
-                @php $maxPuskesmas = max($puskesmasData) ?: 1; @endphp
+                @php $maxPuskesmas = !empty($puskesmasData) ? max($puskesmasData) : 1; @endphp
 
-                @foreach($puskesmasLabels as $index => $label)
+                @forelse($puskesmasLabels as $index => $label)
                     @php
                         $total = $puskesmasData[$index];
                         $percentage = ($total / $maxPuskesmas) * 100;
@@ -139,7 +142,9 @@
                     <div class="progress mb-3">
                         <div class="progress-bar bg-success" role="progressbar" style="width: {{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-center text-muted">Tidak ada data distribusi puskesmas.</p>
+                @endforelse
             </div>
         </div>
     </div>

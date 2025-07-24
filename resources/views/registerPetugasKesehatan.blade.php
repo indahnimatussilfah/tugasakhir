@@ -25,6 +25,18 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="no_telpon" class="block text-sm font-medium text-gray-700">No Telpon</label>
+                    <input type="text" id="no_telpon" name="no_telpon" placeholder="Masukkan no telpon"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                </div>
+
+                <div class="mb-4">
+                    <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
+                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat lengkap"
+                        class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" rows="3"></textarea>
+                </div>
+
+                <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input type="password" id="password" name="password" placeholder="Masukkan password"
                         class="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">

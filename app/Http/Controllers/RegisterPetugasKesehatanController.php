@@ -20,26 +20,27 @@ class RegisterPetugasKesehatanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|string|max:50',
-            'no_telpon' => 'required|string|max:20',
-            'alamat' => 'required|string|max:255',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:6|confirmed',
+        'role' => 'required|string|max:50',
+        'no_telpon' => 'required|string|max:20',
+        'alamat' => 'required|string|max:255',
+    ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'nik' => 'null',
-            'password' => Hash::make($request->password),
-            'role' => 'petugas_kesehatan',
-            'no_telpon' => $request->no_telpon,
-            'alamat' => $request->alamat,
-        ]);
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role' => 'petugas_kesehatan',
+        'nik' => null, // ✅ NILAI NULL SEBENARNYA
+        'no_telpon' => $request->no_telpon,
+        'alamat' => $request->alamat,
+    ]);
 
-        return redirect()->route('login.show')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
+    return redirect()->route('login.show')->with('success', 'Registrasi berhasil! Silakan login.');
+}
+
 }
