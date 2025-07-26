@@ -24,7 +24,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Manajemen Daata
+                Manajemen Data
             </div>
 
 

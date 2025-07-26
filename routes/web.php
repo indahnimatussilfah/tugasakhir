@@ -27,6 +27,8 @@ use App\Http\Controllers\MonitoringPelaporanController;
 use App\Http\Controllers\PetugasanaliDashboardController;
 use App\Http\Controllers\RegisterPetugasKesehatanController;
 use App\Http\Controllers\PetugasKesehatanDashboardController;
+use App\Http\Controllers\PuskesmasController;
+
 
 Route::get('/', function () {
     return view('admin.layouts.app');
@@ -237,3 +239,12 @@ Route::middleware(['auth'])->group(function () {
     //     return redirect()->route('home.index');
     // })->name('logout');
 });
+
+
+Route::get('/puskesmas', [PuskesmasController::class, 'index'])->name('puskesmas.index');
+Route::get('/puskesmas/create', [PuskesmasController::class, 'create'])->name('puskesmas.create');
+Route::post('/puskesmas', [PuskesmasController::class, 'store'])->name('puskesmas.store');
+Route::get('/puskesmas/{puskesmas}', [PuskesmasController::class, 'show'])->name('puskesmas.show');
+Route::get('/puskesmas/{puskesmas}/edit', [PuskesmasController::class, 'edit'])->name('puskesmas.edit');
+Route::put('/puskesmas/{puskesmas}', [PuskesmasController::class, 'update'])->name('puskesmas.update');
+Route::delete('/puskesmas/{puskesmas}', [PuskesmasController::class, 'destroy'])->name('puskesmas.destroy');

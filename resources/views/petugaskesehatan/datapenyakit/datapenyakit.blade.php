@@ -71,7 +71,7 @@
                     <thead class="thead-light text-center">
                         <tr>
                             <th>No</th>
-                            <th>Tanggal</th>
+                            {{-- <th>Tanggal</th> --}}
                             <th>Nama Penyakit</th>
                             <th>Jumlah Kasus</th>
                             <th>L</th>
@@ -91,7 +91,7 @@
                         @forelse ($dataPenyakit as $index => $item)
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
-                                <td class="text-center">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                                {{-- <td class="text-center">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td> --}}
                                 <td>{{ $item->nama_penyakit }}</td>
                                 <td class="text-end">{{ $item->jumlah }}</td>
                                 <td class="text-end">{{ $item->laki_laki }}</td>

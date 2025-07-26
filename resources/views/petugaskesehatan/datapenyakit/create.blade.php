@@ -21,10 +21,10 @@
             <form action="{{ route('datapenyakit.store') }}" method="POST">
                 @csrf
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="tanggal">Tanggal Laporan</label>
                     <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}" required>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                     <label for="nama_penyakit">Nama Penyakit</label>
@@ -37,11 +37,11 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="laki_laki">Laki-laki</label>
                         <input type="number" name="laki_laki" min="0" class="form-control" value="{{ old('laki_laki') }}">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="perempuan">Perempuan</label>
                         <input type="number" name="perempuan" min="0" class="form-control" value="{{ old('perempuan') }}">
                     </div>
@@ -49,27 +49,27 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="anak">Bayi(0 - 12 Bulan)</label>
+                        <label for="bayi">Bayi (0–12 bulan)</label>
                         <input type="number" name="bayi" min="0" class="form-control" value="{{ old('bayi') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="anak">Balita ( 1 - 5 tahun)</label>
+                        <label for="balita">Balita (1–5 tahun)</label>
                         <input type="number" name="balita" min="0" class="form-control" value="{{ old('balita') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="anak">Anak ( 5 - 12 tahun )</label>
+                        <label for="anak">Anak (5–12 tahun)</label>
                         <input type="number" name="anak" min="0" class="form-control" value="{{ old('anak') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="anak">Remaja ( 10 - 19 tahun )</label>
+                        <label for="remaja">Remaja (13–19 tahun)</label>
                         <input type="number" name="remaja" min="0" class="form-control" value="{{ old('remaja') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="dewasa">Dewasa ( 20 - 60 tahun)</label>
+                        <label for="dewasa">Dewasa (20–59 tahun)</label>
                         <input type="number" name="dewasa" min="0" class="form-control" value="{{ old('dewasa') }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="lansia">Lansia ( 60 - 75 tahun)</label>
+                        <label for="lansia">Lansia (60+ tahun)</label>
                         <input type="number" name="lansia" min="0" class="form-control" value="{{ old('lansia') }}">
                     </div>
                 </div>
@@ -80,12 +80,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="kecamatan">Kecamatan</label>
-                    <input type="text" name="kecamatan" class="form-control" value="{{ old('kecamatan') }}">
+                    <label for="district_code">Kecamatan</label>
+                    <select name="district_code" id="district" class="form-control" required>
+                        <option value="">Pilih Kecamatan</option>
+                        @foreach($districts as $district)
+                            <option value="{{ $district->code }}" {{ old('district_code') == $district->code ? 'selected' : '' }}>
+                                {{ $district->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('datapenyakit.index') }}" class="btn btn-secondary">Kembali</a>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('datapenyakit.index') }}" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
             </form>
         </div>
     </div>

@@ -9,6 +9,7 @@ use App\Models\DataPenyakit;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\SimpleExcel\SimpleExcelWriter;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Laravolt\Indonesia\Models\District; // Pastikan ini ada di bagian atas
 
 class DataPenyakitController extends Controller
 {
@@ -28,10 +29,16 @@ class DataPenyakitController extends Controller
     }
 
     public function create()
-    {
-        return view('petugaskesehatan.datapenyakit.create');
-    }
+{
+    $districts = District::where('city_code', '!=', null)
+                         ->whereHas('city', function ($query) {
+                             $query->where('name', 'LIKE', '%Indramayu%');
+                         })
+                         ->orderBy('name')
+                         ->get();
 
+    return view('petugaskesehatan.datapenyakit.create', compact('districts'));
+}
     public function store(Request $request)
     {
         $validated = $request->validate([
